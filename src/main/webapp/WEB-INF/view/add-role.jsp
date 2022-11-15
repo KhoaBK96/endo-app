@@ -17,7 +17,11 @@
 			<form:hidden path="id"/>
 			<div>
 				<label for="code">Role code</label>
-				<form:input path="code"/>
+				<form:select path="code">
+					<c:forEach var="roleCode" items='${roleCodes}'>
+						<option value=${roleCode}>${roleCode}</option>
+					</c:forEach>
+				</form:select>
 			</div>
 			<br>
 			<div>

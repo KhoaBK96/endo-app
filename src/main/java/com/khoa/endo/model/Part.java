@@ -35,8 +35,7 @@ public class Part {
 	@NotNull
 	private String name;
 
-	@NotNull
-	private Double price;
+
 	
 	@OneToMany(mappedBy = "part",  fetch = FetchType.LAZY)
 	private List<RepairRankForModel> repairRankForModelList;
@@ -49,7 +48,7 @@ public class Part {
 
 	@Override
 	public String toString() {
-		return "Part [id=" + id + ", code=" + code + ", name=" + name + ", price=" + price + ", deleted=" + deleted
+		return "Part [id=" + id + ", code=" + code + ", name=" + name + ", deleted=" + deleted
 				+ "]";
 	}
 

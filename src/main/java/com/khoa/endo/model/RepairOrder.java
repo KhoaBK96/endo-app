@@ -44,7 +44,6 @@ public class RepairOrder {
 	private String hospital;
 	
 	@ManyToOne
-	@NotNull
 	private RepairRank repairRank;
 	
 	@OneToMany(mappedBy = "repairOrder", fetch = FetchType.LAZY)

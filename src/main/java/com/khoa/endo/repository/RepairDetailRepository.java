@@ -12,6 +12,9 @@ import com.khoa.endo.model.RepairDetail;
 public interface RepairDetailRepository extends JpaSoftDeleteRepository<RepairDetail, Integer> {
 	
 	@Query("SELECT rd FROM RepairDetail rd WHERE rd.repairOrder.id = :repairOrderId")
+	List<RepairDetail> showPartDetailIncludeDeleted(int repairOrderId);
+	
+	@Query("SELECT rd FROM RepairDetail rd WHERE rd.repairOrder.id = :repairOrderId AND rd.deleted = 0")
 	List<RepairDetail> showPartDetail(int repairOrderId);
 	
 }

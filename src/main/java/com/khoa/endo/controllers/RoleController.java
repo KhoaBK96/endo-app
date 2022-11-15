@@ -36,12 +36,9 @@ public class RoleController {
 		
 		Role role = new Role();
 		
-		String roleCodeMan = RoleCode.MANAGER.name();
+		RoleCode[] roleCodes = RoleCode.values();
 		
-		
-		
-		
-		
+		model.addAttribute("roleCodes", roleCodes);
 		model.addAttribute("role", role);
 		
 		return "add-role";

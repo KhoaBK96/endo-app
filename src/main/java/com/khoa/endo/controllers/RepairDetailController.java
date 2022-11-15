@@ -1,5 +1,7 @@
 package com.khoa.endo.controllers;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.khoa.endo.dto.PartDTO;
 import com.khoa.endo.model.Part;
 import com.khoa.endo.model.RepairDetail;
 import com.khoa.endo.model.RepairOrder;
+import com.khoa.endo.model.RepairRank;
+import com.khoa.endo.model.RepairRankForModel;
 import com.khoa.endo.service.PartService;
 import com.khoa.endo.service.RepairDetailService;
 import com.khoa.endo.service.RepairOrderService;
+import com.khoa.endo.service.RepairRankForModelService;
+import com.khoa.endo.service.RepairRankService;
 
 @Controller
 @RequestMapping("/api/repairDetail")
@@ -30,58 +37,76 @@ public class RepairDetailController {
 	@Autowired
 	RepairOrderService repairOrderService;
 
-	@GetMapping
-	private String showRepairDetail(Model model) {
+	@Autowired
+	RepairRankService repairRankService;
 
-		List<RepairDetail> repairDetailList = repairDetailService.getAll();
-		
+	@Autowired
+	RepairRankForModelService repairRankForModelService;
+
+	@GetMapping
+	private String showRepairDetail(@RequestParam int repairOrderId, Model model) {
+
+		List<RepairDetail> repairDetailList = repairDetailService.showPartDetail(repairOrderId);
+
 		model.addAttribute("repairDetailList", repairDetailList);
-		
+
 		return "repair-detail";
 	}
 
 	@GetMapping("/add")
-	private String addRepairDetail(Model model) {
+	private String addRepairDetail(@RequestParam int repairOrderId, Model model) {
 
-		RepairDetail repairDetail = new RepairDetail();
-
-		List<Part> partList = partService.getAll();
-
-		List<RepairOrder> repairOrderList = repairOrderService.getAll();
-
-		model.addAttribute("repairDetail", repairDetail);
-
-		model.addAttribute("partList", partList);
-
-		model.addAttribute("repairOrderList", repairOrderList);
-
-		return "add-repair-detail";
-	}
-
-	@PostMapping("/save")
-	private String saveRepairDetail(RepairDetail repairDetail) {
-
-		repairDetailService.create(repairDetail);
-
-		return "redirect:/api/repairDetail";
-	}
-
-	@GetMapping("/edit")
-	private String editRepairDetail(@RequestParam("id") int id, Model model) {
-
-		RepairDetail foundRepairDetail = repairDetailService.getById(id);
-
-		List<Part> partList = partService.getAll();
-
-		List<RepairOrder> repairOrderList = repairOrderService.getAll();
-
-		model.addAttribute("foundRepairDetail", foundRepairDetail);
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+		model.addAttribute("repairOrder", repairOrder);
 		
-		model.addAttribute("partList", partList);
+		com.khoa.endo.model.Model modelRepair = repairOrder.getModel();
+		model.addAttribute("model", modelRepair);
 
-		model.addAttribute("repairOrderList", repairOrderList);
+		List<RepairRank> repairRankList = repairRankService.getAll();
+		model.addAttribute("repairRankList", repairRankList);
+
 
 		return "add-repair-detail";
+	}
+
+	@PostMapping("/editRepairDetail")
+	private String saveRepairDetail(RepairOrder repairOrder, Model model) {
+		
+		com.khoa.endo.model.Model modelRepair = repairOrder.getModel();
+		RepairRank rank = repairOrder.getRepairRank();
+		
+		int modelId = modelRepair.getId();
+		int rankId = rank.getId();
+		
+		model.addAttribute("modelRepair", modelRepair);	
+		model.addAttribute("rank", rank);
+		
+		List<Part> partList = partService.getAll();
+
+		HashMap<String, PartDTO> partMap = new HashMap<String, PartDTO>();
+
+		for (Integer i = 0; i < partList.size(); i++) {
+			Part part = partList.get(i);
+
+			PartDTO partDTO = new PartDTO(part);
+			partMap.put(part.getName(), partDTO);
+
+		}
+		List<RepairRankForModel> foundRepairRankForModelList = repairRankForModelService.showRepairRankForModel(modelId,
+				rankId);
+
+		for (Integer i = 0; i < foundRepairRankForModelList.size(); i++) {
+			Part part = foundRepairRankForModelList.get(i).getPart();
+			Integer quantity = foundRepairRankForModelList.get(i).getQuantity();
+
+			PartDTO partDTO = partMap.get(part.getName());
+			partDTO.setQuantity(quantity);
+		}
+
+		Collection<PartDTO> partQuantityList = partMap.values();
+		model.addAttribute("partQuantityList", partQuantityList);
+
+		return "repair-detail-edit";
 	}
 
 	@GetMapping("/delete")

@@ -19,7 +19,7 @@
 			<th>Quantity</th>
 			<th></th>
 		</tr>
-		<c:forEach var="repairRankForModel" items="${repairRankForModelList}">
+		<c:forEach var="repairRankForModel" items="${repairRankForModels}">
 			<tr>
 				<td>${repairRankForModel.model.name}</td>
 				<td>${repairRankForModel.repairRank.name}</td>

@@ -35,7 +35,6 @@ public class RepairDetail {
 
 	private Integer quantity;
 
-	private Double price;
 	
 	@JsonIgnore
 	private boolean deleted;
@@ -43,10 +42,26 @@ public class RepairDetail {
 	@Embedded
 	private MetaData metaData;
 
-	@Override
-	public String toString() {
-		return "RepairDetail [id=" + id + ", repairOrder=" + repairOrder + ", part=" + part + ", quantity=" + quantity
-				+ ", price=" + price + "]";
+	
+
+
+	public RepairDetail(@NotNull RepairOrder repairOrder, Part part, Integer quantity) {
+		super();
+		this.repairOrder = repairOrder;
+		this.part = part;
+		this.quantity = quantity;
+	}
+
+
+
+
+	public RepairDetail(Integer id, @NotNull RepairOrder repairOrder, Part part, Integer quantity, boolean deleted) {
+		super();
+		this.id = id;
+		this.repairOrder = repairOrder;
+		this.part = part;
+		this.quantity = quantity;
+		this.deleted = deleted;
 	}
 	
 	

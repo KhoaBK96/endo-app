@@ -1,5 +1,7 @@
 package com.khoa.endo.controllers;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.khoa.endo.dto.PartDTO;
 import com.khoa.endo.model.Part;
 import com.khoa.endo.model.RepairRank;
 import com.khoa.endo.model.RepairRankForModel;
@@ -37,13 +40,9 @@ public class RepairRankForModelController {
 	@GetMapping
 	private String showRepairRankForModel(Model model) {
 
-		List<com.khoa.endo.model.Model> modelRepairList = modelService.getAll();
+		List<RepairRankForModel> repairRankForModels = repairRankForModelService.getAll();
 		
-		List<RepairRank> repairRankList = repairRankService.getAll();
-		
-		model.addAttribute("repairRankList", repairRankList);
-		
-		model.addAttribute("modelRepairList", modelRepairList);
+		model.addAttribute("repairRankForModels", repairRankForModels);
 
 		return "repair-rank-for-model";
 	}
@@ -95,15 +94,35 @@ public class RepairRankForModelController {
 		
 		RepairRank rank = repairRankService.getById(rankId);
 		
-		model.addAttribute("partList", partList);
-		
-		model.addAttribute("modelRepair", modelRepair);
-		
+		model.addAttribute("partList", partList);	
+		model.addAttribute("modelRepair", modelRepair);	
 		model.addAttribute("rank", rank);
+		
+		HashMap<String, PartDTO> partMap = new HashMap<String, PartDTO>();
+		
+		
+		for(Integer i=0; i< partList.size(); i++) {
+			Part part = partList.get(i);
+			
+			PartDTO partDTO = new PartDTO(part);
+			partMap.put(part.getName(), partDTO);
+			
+		}
+		
+		List<RepairRankForModel> foundRepairRankForModelList = repairRankForModelService.showRepairRankForModel(modelId, rankId);
+		
+		for(Integer i=0; i<foundRepairRankForModelList.size(); i++) {
+			Part part = foundRepairRankForModelList.get(i).getPart();
+			Integer quantity = foundRepairRankForModelList.get(i).getQuantity();
+			
+			PartDTO partDTO = partMap.get(part.getName());
+			partDTO.setQuantity(quantity);
+		}
+		
+		Collection<PartDTO> partQuantityList = partMap.values();
+		model.addAttribute("partQuantityList", partQuantityList);
 		
 		return "repair-part";
 	}
-	
-	
 	
 }

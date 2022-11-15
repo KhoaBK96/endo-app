@@ -52,6 +52,17 @@ public class RepairRankForModel {
 		return "RepairRankForModel [id=" + id + ", model=" + model + ", repairRank=" + repairRank + ", part=" + part
 				+ ", quantity=" + quantity + ", deleted=" + deleted + "]";
 	}
+
+	public RepairRankForModel(@NotNull Model model, @NotNull RepairRank repairRank, @NotNull Part part,
+			@NotNull Integer quantity) {
+		super();
+		this.model = model;
+		this.repairRank = repairRank;
+		this.part = part;
+		this.quantity = quantity;
+	}
+
+	
 	
 	
 }

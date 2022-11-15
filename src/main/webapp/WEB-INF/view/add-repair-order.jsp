@@ -38,7 +38,11 @@
 			<br>
 			<div>
 				<label for="status">Status</label>
-				<form:input path="status" />
+				<form:select path="status">
+					<c:forEach var="status" items='${statusList}'>
+						<option value="${status}">${status}</option>
+					</c:forEach>
+				</form:select>
 			</div>
 			<br>
 			<div>
@@ -46,21 +50,7 @@
 				<form:input path="hospital" />
 			</div>
 			<br>
-			<div>
-				<label for="repairRank">Rank</label>
-				<form:select path="repairRank">
-					<c:forEach var="repairRank" items="${repairRankList}">
-						<c:choose>
-							<c:when test="${repairRank.id == repairOrder.repairRank.id}">
-								<option value="${repairRank.id}" selected="selected">${repairRank.name}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${repairRank.id}">${repairRank.name}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</form:select>
-			</div>
+			
 			<br>
 		</div>
 		<br>

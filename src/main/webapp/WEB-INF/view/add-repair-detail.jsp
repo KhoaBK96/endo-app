@@ -11,57 +11,27 @@
 </head>
 <body>
 	<h1>Repair Detail Management</h1>
+	<h3>Repair Order : ${repairOrder.id}</h3>
+	<h3>Model: ${model.name}</h3>
 	<br>
-	<form:form action="save" modelAttribute="repairDetail">
-		<div>
-			<form:hidden path="id" />
-			<div>
-				<label for="repairOrder">Repair Order</label>
-				<form:select path="repairOrder">
-					<c:forEach var="repairOrder" items="${repairOrderList}">
-						<c:choose>
-							<c:when test="${repairOrder.id == repairDetail.repairOrder.id}">
-								<option value="${repairOrder.id}" selected="selected">${repairOrder.code}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${repairOrder.id}">${repairOrder.code}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</form:select>
-			</div>
-			<br>
-			<div>
-				<label for="part">Part</label>
-				<form:select path="part">
-					<c:forEach var="part" items="${partList}">
-						<c:choose>
-							<c:when test="${part.id == repairDetail.part.id}">
-								<option value="${part.id}" selected="selected">${part.code}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${part.id}">${part.code}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</form:select>
-			</div>
-			<br>
-			<div>
-				<label for="quantity">Quantity</label>
-				<form:input path="quantity" />
-			</div>
-			<br>
-			<div>
-				<label for="price">Price</label>
-				<form:input path="price" />
-			</div>
-			<br>
-		</div>
-		<br>
-		<div>
-			<input type="submit" value="submit">
-		</div>
+	<form:form action="editRepairDetail" modelAttribute="repairOrder">
+		<form:input  type="hidden" path="id" value="${repairOrderId}"/>
+		<form:input  type="hidden" path="model" value="${model.id}"/>
+	<div>
+		<label for="repairRank">Repair Rank</label>
+		<form:select path="repairRank">
+			<c:forEach var="repairRank" items="${repairRankList}">
+				<option value="${repairRank.id}">${repairRank.name}</option>
+			</c:forEach>
+		</form:select>
+	</div>
+	<br>
+	<input type="submit" value="submit">
 	</form:form>
+	<br>
+	<div>
+			
+    </div>
+	
 </body>
 </html>

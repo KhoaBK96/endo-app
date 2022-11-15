@@ -12,25 +12,26 @@
 <body>
 	<h1>PART FOR MODEL ${modelRepair.name} AND RANK ${rank.name}</h1>
 	<button id="save" onclick="visitPage();">Apply</button>
-	<input type="hidden" id="modelId" value="${modelRepair.id}"/>
-	<input type="hidden" id="rankId" value="${rank.id}"/>
+	<input type="hidden" id="modelId" value="${modelRepair.id}" />
+	<input type="hidden" id="rankId" value="${rank.id}" />
+	<input type="hidden" id="repairOrderId" value="${repairOrder.id}" />
 	<table>
 		<tr>
 			<th>Code</th>
 			<th>Name</th>
 			<th>Quantity</th>
-
 		</tr>
 		<c:forEach var="partDTO" items="${partQuantityList}">
 			<div class="edit-part-table">
 				<tr>
 					<td>${partDTO.part.code}</td>
 					<td>${partDTO.part.name}</td>
-					<td><input data-id="${partDTO.part.id}" class="quantity" type="number" value="${partDTO.quantity}" min="0" step="1"/></td>
+					<td><input data-id="${partDTO.part.id}" class="quantity"
+						type="number" value="${partDTO.quantity}" min="0" step="1" /></td>
 				</tr>
 			</div>
 		</c:forEach>
-		
+
 	</table>
 	<br>
 
@@ -62,7 +63,10 @@
 			const rankInput = document.getElementById('rankId');
 			const rankId = rankInput.value;
 			
-			fetch('/api/repairRankForModel/updatePartList',{
+			const repairOrderInput = document.getElementById('repairOrderId');
+			const repairOrderId = repairOrderInput.value;
+			
+			fetch('/api/repairDetail/addRepairDetail',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -71,6 +75,7 @@
 					partIdQuantityList: parts,
 					modelId: modelId,
 					repairRankId: rankId,
+					repairOrderId: repairOrderId
 				})
 			})
 				//.then(res => res.json())
@@ -89,8 +94,12 @@
 		// tra nguoc lai fetch -> tuy ket qua thong bao thanh cong khong
 		)
 		
-		function visitPage(){
-			window.location = "http://localhost:8080/api/repairRankForModel/";
+	function visitPage(){
+		const repairOrderInput = document.getElementById('repairOrderId');
+		const repairOrderId = repairOrderInput.value;
+		
+		window.location="http://localhost:8080/api/repairOrder/repairDetail?id=" + repairOrderId;
 	}
+		
 	
 </script>

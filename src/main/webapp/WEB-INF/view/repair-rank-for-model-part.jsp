@@ -19,7 +19,7 @@
 		</tr>
 		<c:forEach var="repairRankForModel" items="${repairRankForModelList}">
 			<tr>
-				<td>${repairRankForModel.part.id}</td>
+				<td>${repairRankForModel.part.code}</td>
 				<td>${repairRankForModel.quantity}</td>
 			</tr>
 		</c:forEach>

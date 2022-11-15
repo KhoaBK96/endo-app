@@ -2,6 +2,7 @@ package com.khoa.endo.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.khoa.endo.model.RepairDetail;
 import com.khoa.endo.model.RepairOrder;
 import com.khoa.endo.model.RepairRank;
+import com.khoa.endo.model.Status;
 import com.khoa.endo.service.ModelService;
 import com.khoa.endo.service.RepairDetailService;
 import com.khoa.endo.service.RepairOrderService;
@@ -60,6 +62,9 @@ public class RepairOrderController {
 		List<RepairRank> repairRankList = repairRankService.getAll();
 
 		List<com.khoa.endo.model.Model> modelList = modelService.getAll();
+		
+		Status[] statusList = Status.values();
+		model.addAttribute("statusList", statusList);
 
 		model.addAttribute("repairRankList", repairRankList);
 
@@ -76,7 +81,7 @@ public class RepairOrderController {
 
 		repairOrderService.create(repairOrder);
 
-		return "redirect:/api/repair-order";
+		return "redirect:/api/repairOrder";
 	}
 
 	@GetMapping("/edit")
@@ -109,6 +114,10 @@ public class RepairOrderController {
 	private String showDetail(@RequestParam("id") int id, Model model) {
 		
 		List<RepairDetail> RepairDetailList = repairDetailService.showPartDetail(id);
+		
+		RepairOrder repairOrder = repairOrderService.getById(id);
+		
+		model.addAttribute("repairOrder", repairOrder);
 		
 		model.addAttribute("repairDetailList", RepairDetailList);
 		
