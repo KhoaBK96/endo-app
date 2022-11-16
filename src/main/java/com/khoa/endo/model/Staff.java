@@ -1,6 +1,7 @@
 package com.khoa.endo.model;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,7 +59,10 @@ public class Staff implements UserDetails {
 	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		RoleCode code = role.getCode();
+		String codeName = code.name();
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(codeName);
+		return Collections.singletonList(authority);
 	}
 
 	@JsonIgnore

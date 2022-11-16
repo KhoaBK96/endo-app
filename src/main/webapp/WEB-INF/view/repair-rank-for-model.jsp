@@ -15,16 +15,12 @@
 		<tr>
 			<th>Model</th>
 			<th>Repair Rank</th>
-			<th>Part</th>
-			<th>Quantity</th>
 			<th></th>
 		</tr>
 		<c:forEach var="repairRankForModel" items="${repairRankForModels}">
 			<tr>
 				<td>${repairRankForModel.model.name}</td>
 				<td>${repairRankForModel.repairRank.name}</td>
-				<td>${repairRankForModel.part.code}</td>
-				<td>${repairRankForModel.quantity}</td>
 				<td><button>
 						<a
 							href="${pageContext.servletContext.contextPath}/api/repairRankForModel/edit?id=${repairRankForModel.id}">Edit

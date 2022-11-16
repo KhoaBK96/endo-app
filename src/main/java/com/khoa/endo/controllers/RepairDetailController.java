@@ -18,6 +18,7 @@ import com.khoa.endo.model.RepairDetail;
 import com.khoa.endo.model.RepairOrder;
 import com.khoa.endo.model.RepairRank;
 import com.khoa.endo.model.RepairRankForModel;
+import com.khoa.endo.model.Status;
 import com.khoa.endo.service.PartService;
 import com.khoa.endo.service.RepairDetailService;
 import com.khoa.endo.service.RepairOrderService;
@@ -44,11 +45,13 @@ public class RepairDetailController {
 	RepairRankForModelService repairRankForModelService;
 
 	@GetMapping
-	private String showRepairDetail(@RequestParam int repairOrderId, Model model) {
+	private String showRepairDetail(@RequestParam("id") int repairOrderId, Model model) {
 
 		List<RepairDetail> repairDetailList = repairDetailService.showPartDetail(repairOrderId);
-
 		model.addAttribute("repairDetailList", repairDetailList);
+		
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+		model.addAttribute("repairOrder", repairOrder);
 
 		return "repair-detail";
 	}
@@ -115,5 +118,29 @@ public class RepairDetailController {
 		repairDetailService.delete(id);
 
 		return "redirect:/api/repairDetail";
+	}
+	
+	@GetMapping("/quotationComplete")
+	private String updateQuotationStatus(@RequestParam("repairOrderId") int repairOrderId, Model model) {
+		
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+		
+		repairOrder.setStatus(Status.WAITING_FOR_REPAIR);
+		
+		repairOrderService.update(repairOrder);
+		
+		return "redirect:/api/repairOrder";
+	}
+	
+	@GetMapping("/repairComplete")
+	private String updateRepairStatus(@RequestParam("repairOrderId") int repairOrderId, Model model) {
+		
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+		
+		repairOrder.setStatus(Status.COMPLETE);
+		
+		repairOrderService.update(repairOrder);
+		
+		return "redirect:/api/repairOrder";
 	}
 }

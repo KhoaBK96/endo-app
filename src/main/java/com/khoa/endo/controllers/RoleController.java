@@ -62,8 +62,10 @@ public class RoleController {
 	public String editRole(@RequestParam("id") int id, Model model) {
 		
 		Role editRole = roleService.getById(id);
-		
 		model.addAttribute("role", editRole);
+		
+		RoleCode[] roleCodes = RoleCode.values();
+		model.addAttribute("roleCodes", roleCodes);
 		
 		return "add-role";
 		

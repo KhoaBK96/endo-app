@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.khoa.endo.model.RoleCode;
+
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -22,7 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/api/role").permitAll().and().csrf().disable();
+		http.authorizeRequests()
+		.antMatchers("/api/repairOrder/","/api/repairOrder/add").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name(),RoleCode.COORDINATOR.name())
+		.antMatchers("/api/repairOrder/**").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name())
+		.antMatchers("/api/**").hasAuthority(RoleCode.MANAGER.name())
+		.and().formLogin()
+//		.antMatchers("/").permitAll()
+		.and().csrf().disable();
 	}
 	
 	@Override

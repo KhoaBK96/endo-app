@@ -30,9 +30,23 @@
 		<a href="${pageContext.servletContext.contextPath}/api/repairDetail/add?repairOrderId=${repairOrder.id}">Add Repair Package</a>
 	</button>
 	
-	<button>
-		<a href="${pageContext.servletContext.contextPath}/api/repairDetail/quotationComplete?repairOrderId=${repairOrder.id}">Quotation Complete</a>
-	</button>
+	<c:choose>
+		<c:when test='${repairOrder.status == "WAITING_FOR_QUOTE"}'>
+			<button>
+				<a href="${pageContext.servletContext.contextPath}/api/repairDetail/quotationComplete?repairOrderId=${repairOrder.id}">Quotation Complete</a>
+			</button>
+		</c:when>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test='${repairOrder.status == "WAITING_FOR_REPAIR"}'>
+			<button>
+				<a href="${pageContext.servletContext.contextPath}/api/repairDetail/repairComplete?repairOrderId=${repairOrder.id}">Repair Complete</a>
+			</button>
+		</c:when>
+	</c:choose>
+		
+	
 
 </body>
 </html>

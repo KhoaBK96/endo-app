@@ -150,4 +150,10 @@ public class RepairRankForModelImpl implements RepairRankForModelService {
 		return updatePartDTO;
 	}
 
+	@Override
+	public List<RepairRankForModel> display() {
+		// TODO Auto-generated method stub
+		return repairRankForModelRepository.display();
+	}
+
 }

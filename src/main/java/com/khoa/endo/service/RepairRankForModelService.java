@@ -12,4 +12,6 @@ public interface RepairRankForModelService extends BaseService<RepairRankForMode
 	void updatePartQuantityList(Integer modelId, Integer repairRankId, Integer quantity, Integer partId);
 
 	UpdatePartDTO updatePartList(UpdatePartDTO updatePartDTO);
+	
+	 List<RepairRankForModel> display();
 }

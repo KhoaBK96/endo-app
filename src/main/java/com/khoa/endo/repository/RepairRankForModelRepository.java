@@ -20,4 +20,7 @@ public interface RepairRankForModelRepository extends JpaSoftDeleteRepository<Re
 	@Modifying
 	@Query("UPDATE RepairRankForModel rm SET rm.quantity= :quantity WHERE rm.model.id= :modelId and repairRank.id = :repairRankId and rm.part.id= :partId")
 	void updatePartQuantityList(Integer modelId, Integer repairRankId, Integer quantity, Integer partId);
+	
+	@Query("SELECT rm.model, rm.repairRank FROM RepairRankForModel rm GROUP BY rm.model, rm.repairRank")
+	 List<RepairRankForModel> display();
 }
