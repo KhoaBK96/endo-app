@@ -16,10 +16,13 @@ import com.khoa.endo.exception.RepairDetailNotFoundException;
 import com.khoa.endo.model.Part;
 import com.khoa.endo.model.RepairDetail;
 import com.khoa.endo.model.RepairOrder;
+import com.khoa.endo.model.RepairRank;
 import com.khoa.endo.repository.RepairDetailRepository;
+import com.khoa.endo.repository.RepairOrderRepository;
 import com.khoa.endo.service.PartService;
 import com.khoa.endo.service.RepairDetailService;
 import com.khoa.endo.service.RepairOrderService;
+import com.khoa.endo.service.RepairRankService;
 
 @Service
 @Transactional
@@ -29,10 +32,16 @@ public class RepairDetailServiceImpl implements RepairDetailService {
 	RepairDetailRepository repairDetailRepository;
 	
 	@Autowired
+	RepairOrderRepository repairOrderRepository;
+	
+	@Autowired
 	PartService partService;
 	
 	@Autowired
 	RepairOrderService repairOrderService;
+	
+	@Autowired
+	RepairRankService repairRankService;
 	
 	@Override
 	public List<RepairDetail> getAll() {
@@ -85,6 +94,10 @@ public class RepairDetailServiceImpl implements RepairDetailService {
 		int repairOrderId = updateDetailPartDTO.getRepairOrderId();
 		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
 		
+		RepairRank rank = repairRankService.getById(updateDetailPartDTO.getRepairRankId());
+		repairOrder.setRepairRank(rank);
+		repairOrderRepository.save(repairOrder);
+		
 		HashMap<Integer, Integer> newParts = new HashMap<>();
 		
 		for(int i = 0; i < newPartList.size(); i++) {
@@ -128,6 +141,8 @@ public class RepairDetailServiceImpl implements RepairDetailService {
 			createList.add(newPart);
 		}
 		repairDetailRepository.saveAll(createList);
+		
+		
 	}
 
 }

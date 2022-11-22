@@ -2,7 +2,6 @@ package com.khoa.endo.controllers;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,25 +31,25 @@ public class RepairOrderController {
 
 	@Autowired
 	ModelService modelService;
-	
+
 	@Autowired
 	RepairDetailService repairDetailService;
 
 	@GetMapping
 	private String showRepairOrder(Model model) {
-		
+
 		List<RepairOrder> repairOrderList = repairOrderService.getAll();
-		
+
 		List<RepairRank> repairRankList = repairRankService.getAll();
-		
+
 		List<com.khoa.endo.model.Model> modelList = modelService.getAll();
-		
+
 		model.addAttribute("repairRankList", repairRankList);
-		
+
 		model.addAttribute("modelList", modelList);
-		
+
 		model.addAttribute("repairOrderList", repairOrderList);
-		
+
 		return "repair-order";
 	}
 
@@ -62,14 +61,14 @@ public class RepairOrderController {
 		List<RepairRank> repairRankList = repairRankService.getAll();
 
 		List<com.khoa.endo.model.Model> modelList = modelService.getAll();
-		
+
 		Status[] statusList = Status.values();
 		model.addAttribute("statusList", statusList);
 
 		model.addAttribute("repairRankList", repairRankList);
 
 		model.addAttribute("modelList", modelList);
-		
+
 		model.addAttribute("repairOrder", repairOrder);
 
 		return "add-repair-order";
@@ -79,7 +78,11 @@ public class RepairOrderController {
 	@PostMapping("/save")
 	private String saveRepairOrder(RepairOrder repairOrder) {
 
-		repairOrderService.create(repairOrder);
+		if (repairOrder == null) {
+			repairOrderService.create(repairOrder);
+		} else {
+			repairOrderService.update(repairOrder);
+		}
 
 		return "redirect:/api/repairOrder";
 	}
@@ -92,6 +95,9 @@ public class RepairOrderController {
 		List<RepairRank> repairRankList = repairRankService.getAll();
 
 		List<com.khoa.endo.model.Model> modelList = modelService.getAll();
+
+		Status[] statusList = Status.values();
+		model.addAttribute("statusList", statusList);
 
 		model.addAttribute("repairRankList", repairRankList);
 
@@ -109,18 +115,18 @@ public class RepairOrderController {
 
 		return "repair-order";
 	}
-	
+
 	@GetMapping("/repairDetail")
 	private String showDetail(@RequestParam("id") int id, Model model) {
-		
+
 		List<RepairDetail> RepairDetailList = repairDetailService.showPartDetail(id);
-		
+
 		RepairOrder repairOrder = repairOrderService.getById(id);
-		
+
 		model.addAttribute("repairOrder", repairOrder);
-		
+
 		model.addAttribute("repairDetailList", RepairDetailList);
-		
+
 		return "repair-detail";
 	}
 }

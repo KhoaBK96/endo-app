@@ -49,11 +49,46 @@ public class RepairDetailController {
 
 		List<RepairDetail> repairDetailList = repairDetailService.showPartDetail(repairOrderId);
 		model.addAttribute("repairDetailList", repairDetailList);
-		
+
 		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
 		model.addAttribute("repairOrder", repairOrder);
 
 		return "repair-detail";
+	}
+	
+	@GetMapping("/editPartList")
+	private String editPartList(@RequestParam("repairOrderId") int repairOrderId, Model model) {
+		
+		List<RepairDetail> repairDetailList = repairDetailService.showPartDetail(repairOrderId);
+		
+		List<Part> partList = partService.getAll();
+
+		HashMap<String, PartDTO> partMap = new HashMap<String, PartDTO>();
+		
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+		model.addAttribute("repairOrder", repairOrder);
+		
+
+		for (Integer i = 0; i < partList.size(); i++) {
+			Part part = partList.get(i);
+
+			PartDTO partDTO = new PartDTO(part);
+			partMap.put(part.getName(), partDTO);
+
+		}
+		
+		for (Integer i = 0; i < repairDetailList.size(); i++) {
+			Part part = repairDetailList.get(i).getPart();
+			Integer quantity = repairDetailList.get(i).getQuantity();
+
+			PartDTO partDTO = partMap.get(part.getName());
+			partDTO.setQuantity(quantity);
+		}
+		
+		Collection<PartDTO> partQuantityList = partMap.values();
+		model.addAttribute("partQuantityList", partQuantityList);
+		
+		return "edit-repair-part";
 	}
 
 	@GetMapping("/add")
@@ -61,29 +96,29 @@ public class RepairDetailController {
 
 		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
 		model.addAttribute("repairOrder", repairOrder);
-		
+
 		com.khoa.endo.model.Model modelRepair = repairOrder.getModel();
 		model.addAttribute("model", modelRepair);
 
 		List<RepairRank> repairRankList = repairRankService.getAll();
 		model.addAttribute("repairRankList", repairRankList);
 
-
 		return "add-repair-detail";
 	}
 
 	@PostMapping("/editRepairDetail")
 	private String saveRepairDetail(RepairOrder repairOrder, Model model) {
-		
+
 		com.khoa.endo.model.Model modelRepair = repairOrder.getModel();
 		RepairRank rank = repairOrder.getRepairRank();
-		
+
 		int modelId = modelRepair.getId();
 		int rankId = rank.getId();
-		
-		model.addAttribute("modelRepair", modelRepair);	
+
+		model.addAttribute("modelRepair", modelRepair);
 		model.addAttribute("rank", rank);
-		
+		model.addAttribute("repairOrder", repairOrder);
+
 		List<Part> partList = partService.getAll();
 
 		HashMap<String, PartDTO> partMap = new HashMap<String, PartDTO>();
@@ -109,8 +144,13 @@ public class RepairDetailController {
 		Collection<PartDTO> partQuantityList = partMap.values();
 		model.addAttribute("partQuantityList", partQuantityList);
 
+		List<RepairDetail> repairDetailList = repairDetailService.showPartDetail(repairOrder.getId());
+		model.addAttribute("repairDetailList", repairDetailList);
+
 		return "repair-detail-edit";
 	}
+	
+
 
 	@GetMapping("/delete")
 	private String deleteRepairDetail(@RequestParam("id") int id, Model model) {
@@ -119,28 +159,30 @@ public class RepairDetailController {
 
 		return "redirect:/api/repairDetail";
 	}
-	
+
 	@GetMapping("/quotationComplete")
 	private String updateQuotationStatus(@RequestParam("repairOrderId") int repairOrderId, Model model) {
-		
+
 		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
-		
+
 		repairOrder.setStatus(Status.WAITING_FOR_REPAIR);
-		
+
 		repairOrderService.update(repairOrder);
-		
+
+		return "redirect:/api/repairOrder";
+	}
+
+	@GetMapping("/repairComplete")
+	private String updateRepairStatus(@RequestParam("repairOrderId") int repairOrderId, Model model) {
+
+		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
+
+		repairOrder.setStatus(Status.COMPLETE);
+
+		repairOrderService.update(repairOrder);
+
 		return "redirect:/api/repairOrder";
 	}
 	
-	@GetMapping("/repairComplete")
-	private String updateRepairStatus(@RequestParam("repairOrderId") int repairOrderId, Model model) {
-		
-		RepairOrder repairOrder = repairOrderService.getById(repairOrderId);
-		
-		repairOrder.setStatus(Status.COMPLETE);
-		
-		repairOrderService.update(repairOrder);
-		
-		return "redirect:/api/repairOrder";
-	}
+	
 }

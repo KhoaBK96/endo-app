@@ -25,43 +25,40 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RepairOrder {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotNull
 	private String code;
-	
+
 	@ManyToOne
 	@NotNull
 	private Model model;
-	
+
 	@NotNull
 	private Status status;
-	
+
 	@NotNull
 	private String hospital;
-	
+
 	@ManyToOne
 	private RepairRank repairRank;
-	
+
 	@OneToMany(mappedBy = "repairOrder", fetch = FetchType.LAZY)
 	private List<RepairDetail> repairDetail;
-	
+
 	@JsonIgnore
 	private boolean deleted;
-	
+
 	@Embedded
 	private MetaData metaData;
 
 	@Override
 	public String toString() {
-		return "RepairOrder [id=" + id + ", code=" + code + ", status=" + status + ", hospital=" + hospital
-				+ ", deleted=" + deleted + "]";
-	} 
+		return "RepairOrder [id=" + id + ", code=" + code + ", model=" + model + ", status=" + status + ", hospital="
+				+ hospital + ", repairRank=" + repairRank + ", deleted=" + deleted + "]";
+	}
 
-	
-	
-	
 }
