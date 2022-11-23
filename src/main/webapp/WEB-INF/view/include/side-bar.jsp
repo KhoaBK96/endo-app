@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
@@ -21,7 +20,8 @@
 					alt="User Image" />
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Amado</a>
+				<a href="#" class="d-block">${pageContext["request"].userPrincipal.principal.username}
+				</a>
 			</div>
 		</div>
 
@@ -61,6 +61,11 @@
 					href="${pageContext.servletContext.contextPath}/api/repairRankForModel/add"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Repair Package</p>
+				</a></li>
+				<li class="nav-item"><a
+					href="${pageContext.servletContext.contextPath}/api/repairOrder"
+					class="nav-link"> <i class="far fa-circle nav-icon"></i>
+						<p>Repair List</p>
 				</a></li>
 
 				</li>
