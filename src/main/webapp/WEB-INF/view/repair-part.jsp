@@ -128,7 +128,7 @@
 			const rankInput = document.getElementById('rankId');
 			const rankId = rankInput.value;
 			console.log(parts)
-			fetch('/api/repairRankForModel/updatePartList',{
+			fetch('/updatePartList',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

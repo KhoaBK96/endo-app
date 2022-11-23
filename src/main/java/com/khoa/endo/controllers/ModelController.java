@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.khoa.endo.service.ModelService;
 
 @Controller
-@RequestMapping("/api/model")
+@RequestMapping("/model")
 public class ModelController {
 
 	@Autowired

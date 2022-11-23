@@ -144,7 +144,7 @@
 			const repairOrderInput = document.getElementById('repairOrderId');
 			const repairOrderId = repairOrderInput.value;
 			
-			fetch('/api/repairDetail/addRepairDetail',{
+			fetch('/updateRepairDetails',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

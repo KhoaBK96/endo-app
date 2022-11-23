@@ -1,5 +1,6 @@
 package com.khoa.endo.controllers;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +15,11 @@ public class RepairDetailRestController {
 	@Autowired
 	RepairDetailService repairDetailService;
 	
-	@PostMapping("/api/repairDetail/addRepairDetail") 
-	private String updateRepairDetail(@RequestBody UpdateDetailPartDTO updateDetailPartDTO) {
+	@PostMapping("/updateRepairDetails") 
+	private int updateRepairDetail(@RequestBody UpdateDetailPartDTO updateDetailPartDTO) {
 		
 		repairDetailService.updateRepairDetail(updateDetailPartDTO);
 		
-		return "";
+		return Response.SC_OK;
 	}
 }
