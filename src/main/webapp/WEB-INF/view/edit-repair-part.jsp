@@ -176,7 +176,7 @@
 		const repairOrderInput = document.getElementById('repairOrderId');
 		const repairOrderId = repairOrderInput.value;
 		
-		window.location="http://localhost:8080/api/repairDetail?id=" + repairOrderId;
+		window.location="http://localhost:8080/repairDetail?id=" + repairOrderId;
 		
 	}
 	$(function () {

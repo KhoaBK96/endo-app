@@ -16,7 +16,7 @@ import com.khoa.endo.service.RoleService;
 import com.khoa.endo.service.StaffService;
 
 @Controller
-@RequestMapping("api/staff")
+@RequestMapping("/staff")
 public class StaffController {
 
 	@Autowired
@@ -62,7 +62,7 @@ public class StaffController {
 			staffService.update(staff);
 		}
 
-		return "redirect:/api/staff";
+		return "redirect:/staff";
 	}
 
 	@GetMapping("/edit")
@@ -84,6 +84,6 @@ public class StaffController {
 
 		staffService.delete(id);
 
-		return "redirect:/api/staff";
+		return "redirect:/staff";
 	}
 }

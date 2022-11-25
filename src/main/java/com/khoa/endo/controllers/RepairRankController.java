@@ -14,7 +14,7 @@ import com.khoa.endo.model.RepairRank;
 import com.khoa.endo.service.RepairRankService;
 
 @Controller
-@RequestMapping("/api/repairRank")
+@RequestMapping("/repairRank")
 public class RepairRankController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class RepairRankController {
 
 		}
 
-		return "redirect:/api/repairRank";
+		return "redirect:/repairRank";
 
 	}
 
@@ -77,7 +77,7 @@ public class RepairRankController {
 
 		repairRankService.update(foundRepairRank);
 
-		return "redirect:/api/repairRank";
+		return "redirect:/repairRank";
 	}
 
 }

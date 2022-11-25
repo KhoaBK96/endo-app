@@ -15,7 +15,7 @@ import com.khoa.endo.model.RoleCode;
 import com.khoa.endo.service.RoleService;
 
 @Controller
-@RequestMapping("/api/role")
+@RequestMapping("/role")
 public class RoleController {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class RoleController {
 			roleService.update(role);
 		}
 		
-		return "redirect:/api/role";
+		return "redirect:/role";
 	}
 	
 	@GetMapping("/edit")
@@ -76,7 +76,7 @@ public class RoleController {
 
 		roleService.delete(id);
 		
-		return "redirect:/api/role";
+		return "redirect:/role";
 		
 	}
 }

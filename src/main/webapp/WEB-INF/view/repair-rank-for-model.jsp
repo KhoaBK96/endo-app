@@ -23,12 +23,12 @@
 				<td>${repairRankForModel.repairRank.name}</td>
 				<td><button>
 						<a
-							href="${pageContext.servletContext.contextPath}/api/repairRankForModel/edit?id=${repairRankForModel.id}">Edit
+							href="${pageContext.servletContext.contextPath}/repairRankForModel/edit?id=${repairRankForModel.id}">Edit
 						</a>
 					</button></td>
 				<td><button>
 						<a
-							href="${pageContext.servletContext.contextPath}/api/repairRankForModel/delete?id=${repairRankForModel.id}">Delete
+							href="${pageContext.servletContext.contextPath}/repairRankForModel/delete?id=${repairRankForModel.id}">Delete
 						</a>
 					</button></td>
 			</tr>
@@ -36,7 +36,7 @@
 	</table>
 	<br>
 	<button>
-		<a href="${pageContext.servletContext.contextPath}/api/repairRankForModel/add">Add</a>
+		<a href="${pageContext.servletContext.contextPath}/repairRankForModel/add">Add</a>
 	</button>
 
 </body>

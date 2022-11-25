@@ -26,7 +26,7 @@ import com.khoa.endo.service.RepairRankForModelService;
 import com.khoa.endo.service.RepairRankService;
 
 @Controller
-@RequestMapping("/api/repairDetail")
+@RequestMapping("/repairDetail")
 public class RepairDetailController {
 
 	@Autowired
@@ -157,7 +157,7 @@ public class RepairDetailController {
 
 		repairDetailService.delete(id);
 
-		return "redirect:/api/repairDetail";
+		return "redirect:/repairDetail";
 	}
 
 	@GetMapping("/quotationComplete")
@@ -169,7 +169,7 @@ public class RepairDetailController {
 
 		repairOrderService.update(repairOrder);
 
-		return "redirect:/api/repairOrder";
+		return "redirect:/repairOrder";
 	}
 
 	@GetMapping("/repairComplete")
@@ -181,7 +181,7 @@ public class RepairDetailController {
 
 		repairOrderService.update(repairOrder);
 
-		return "redirect:/api/repairOrder";
+		return "redirect:/repairOrder";
 	}
 	
 	

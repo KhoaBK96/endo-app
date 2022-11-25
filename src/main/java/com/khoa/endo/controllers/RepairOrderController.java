@@ -20,7 +20,7 @@ import com.khoa.endo.service.RepairOrderService;
 import com.khoa.endo.service.RepairRankService;
 
 @Controller
-@RequestMapping("/api/repairOrder")
+@RequestMapping("/repairOrder")
 public class RepairOrderController {
 
 	@Autowired
@@ -84,7 +84,7 @@ public class RepairOrderController {
 			repairOrderService.update(repairOrder);
 		}
 
-		return "redirect:/api/repairOrder";
+		return "redirect:/repairOrder";
 	}
 
 	@GetMapping("/edit")

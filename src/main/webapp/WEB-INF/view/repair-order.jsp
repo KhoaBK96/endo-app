@@ -34,7 +34,7 @@
 						<div class="card-header">
 							<h3 class="card-title">
 								<a class="btn btn-block btn-primary btn-sm"
-									href="${pageContext.servletContext.contextPath}/api/repairOrder/add">Add</a>
+									href="${pageContext.servletContext.contextPath}/repairOrder/add">Add</a>
 							</h3>
 						</div>
 						<!-- /.card-header -->
@@ -60,15 +60,15 @@
 											<td>${repairOrder.status}</td>
 											<td>${repairOrder.repairRank.name}</td>
 											<td><a class="btn btn-block btn-info btn-sm"
-												href="${pageContext.servletContext.contextPath}/api/repairOrder/repairDetail?id=${repairOrder.id}">Repair
+												href="${pageContext.servletContext.contextPath}/repairOrder/repairDetail?id=${repairOrder.id}">Repair
 													Detail</a></td>
 											<td><a class="btn btn-warning btn-sm btn-edit"
 												title="edit"
-												href="${pageContext.servletContext.contextPath}/api/repairOrder/edit?id=${repairOrder.id}">
+												href="${pageContext.servletContext.contextPath}/repairOrder/edit?id=${repairOrder.id}">
 													<i class="fas fa-pencil-alt"></i>
 											</a> <a class="btn btn-danger btn-sm btn-edit delete-btn"
 												title="delete"
-												href="${pageContext.servletContext.contextPath}/api/repairOrder/delete?id=${repairOrder.id}">
+												href="${pageContext.servletContext.contextPath}/repairOrder/delete?id=${repairOrder.id}">
 													<i class="fas fa-trash"></i>
 											</a></td>
 

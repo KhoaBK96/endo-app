@@ -53,7 +53,7 @@ public class ModelController {
 			
 		}
 
-		return "redirect:/api/model";
+		return "redirect:/model";
 
 	}
 
@@ -73,7 +73,7 @@ public class ModelController {
 		
 		modelService.delete(id);
 		
-		return "redirect:/api/model";
+		return "redirect:/model";
 		
 	}
 }

@@ -36,7 +36,7 @@
 						<div class="card-header">
 							<h3 class="card-title">
 								<a class="btn btn-block btn-primary btn-sm"
-									href="${pageContext.servletContext.contextPath}/api/repairRankForModel/editPart?modelId=${modelId}&rankId=${rankId}">Edit
+									href="${pageContext.servletContext.contextPath}/repairRankForModel/editPart?modelId=${modelId}&rankId=${rankId}">Edit
 								</a>
 							</h3>
 
@@ -85,7 +85,7 @@
 				<c:choose>
 					<c:when test='${repairOrder.status == "WAITING_FOR_QUOTE"}'>
 						<a class="btn  btn-success btn-sm"
-							href="${pageContext.servletContext.contextPath}/api/repairDetail/quotationComplete?repairOrderId=${repairOrder.id}">Quotation
+							href="${pageContext.servletContext.contextPath}/repairDetail/quotationComplete?repairOrderId=${repairOrder.id}">Quotation
 							Complete</a>
 					</c:when>
 				</c:choose>
@@ -93,7 +93,7 @@
 				<c:choose>
 					<c:when test='${repairOrder.status == "WAITING_FOR_REPAIR"}'>
 						<a class="btn  btn-success btn-sm"
-							href="${pageContext.servletContext.contextPath}/api/repairDetail/repairComplete?repairOrderId=${repairOrder.id}">Repair
+							href="${pageContext.servletContext.contextPath}/repairDetail/repairComplete?repairOrderId=${repairOrder.id}">Repair
 							Complete</a>
 					</c:when>
 				</c:choose>

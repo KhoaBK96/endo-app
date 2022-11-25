@@ -22,7 +22,7 @@ import com.khoa.endo.service.RepairRankForModelService;
 import com.khoa.endo.service.RepairRankService;
 
 @Controller
-@RequestMapping("/api/repairRankForModel")
+@RequestMapping("/repairRankForModel")
 public class RepairRankForModelController {
 
 	@Autowired

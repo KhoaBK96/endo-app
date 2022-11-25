@@ -34,7 +34,7 @@
 						<div class="card-header">
 							<h3 class="card-title">
 								<a class="btn btn-block btn-primary btn-sm"
-									href="${pageContext.servletContext.contextPath}/api/part/add">Add</a>
+									href="${pageContext.servletContext.contextPath}/part/add">Add</a>
 							</h3>
 						</div>
 						<!-- /.card-header -->
@@ -54,11 +54,11 @@
 											<td>${part.name}</td>
 											<td><a class="btn btn-warning btn-sm btn-edit"
 												title="edit"
-												href="${pageContext.servletContext.contextPath}/api/part/edit?id=${part.id}">
+												href="${pageContext.servletContext.contextPath}/part/edit?id=${part.id}">
 													<i class="fas fa-pencil-alt"></i>
 											</a> <a class="btn btn-danger btn-sm btn-edit delete-btn"
 												title="delete"
-												href="${pageContext.servletContext.contextPath}/api/part/delete?id=${part.id}"
+												href="${pageContext.servletContext.contextPath}/part/delete?id=${part.id}"
 												s> <i class="fas fa-trash"></i>
 											</a></td>
 
