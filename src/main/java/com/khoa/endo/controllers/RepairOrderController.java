@@ -20,7 +20,7 @@ import com.khoa.endo.service.RepairOrderService;
 import com.khoa.endo.service.RepairRankService;
 
 @Controller
-@RequestMapping("/repairOrder")
+@RequestMapping("/")
 public class RepairOrderController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class RepairOrderController {
 		return "repair-order";
 	}
 
-	@GetMapping("/add")
+	@GetMapping("/repairOrder/add")
 	private String addRepairOrder(Model model) {
 
 		RepairOrder repairOrder = new RepairOrder();
@@ -75,7 +75,7 @@ public class RepairOrderController {
 
 	}
 
-	@PostMapping("/save")
+	@PostMapping("/repairOrder/save")
 	private String saveRepairOrder(RepairOrder repairOrder) {
 
 		if (repairOrder == null) {
@@ -87,7 +87,7 @@ public class RepairOrderController {
 		return "redirect:/repairOrder";
 	}
 
-	@GetMapping("/edit")
+	@GetMapping("/repairOrder/edit")
 	private String editRepairOrder(@RequestParam("id") int id, Model model) {
 
 		RepairOrder repairOrder = repairOrderService.getById(id);
@@ -108,7 +108,7 @@ public class RepairOrderController {
 		return "add-repair-order";
 	}
 
-	@GetMapping("/delete")
+	@GetMapping("/repairOrder/delete")
 	private String deleteRepairOrder(@RequestParam("id") int id) {
 
 		repairOrderService.delete(id);
@@ -116,7 +116,7 @@ public class RepairOrderController {
 		return "repair-order";
 	}
 
-	@GetMapping("/repairDetail")
+	@GetMapping("/repairOrder/repairDetail")
 	private String showDetail(@RequestParam("id") int id, Model model) {
 
 		List<RepairDetail> RepairDetailList = repairDetailService.showPartDetail(id);
