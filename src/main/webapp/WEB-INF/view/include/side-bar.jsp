@@ -5,7 +5,7 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
-	<a href="${pageContext.servletContext.contextPath}/api/repairOrder"
+	<a href="${pageContext.servletContext.contextPath}/repairOrder"
 		class="brand-link"> <img src="/img/AdminLTELogo.png"
 		alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
 		style="opacity: 0.8" /> <span class="brand-text font-weight-light">ENDO</span>
@@ -33,37 +33,37 @@
          with font-awesome or any other icon font library -->
 				<li class="nav-item">
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/role"
+					href="${pageContext.servletContext.contextPath}/role"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Role</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/staff"
+					href="${pageContext.servletContext.contextPath}/staff"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Staff</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/model"
+					href="${pageContext.servletContext.contextPath}/model"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Model</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/repairRank"
+					href="${pageContext.servletContext.contextPath}/repairRank"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Rank</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/part"
+					href="${pageContext.servletContext.contextPath}/part"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Part</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/repairRankForModel/add"
+					href="${pageContext.servletContext.contextPath}/repairRankForModel/add"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Repair Package</p>
 				</a></li>
 				<li class="nav-item"><a
-					href="${pageContext.servletContext.contextPath}/api/repairOrder"
+					href="${pageContext.servletContext.contextPath}/"
 					class="nav-link"> <i class="far fa-circle nav-icon"></i>
 						<p>Repair List</p>
 				</a></li>
