@@ -14,7 +14,7 @@ import com.khoa.endo.model.Part;
 import com.khoa.endo.service.PartService;
 
 @Controller
-@RequestMapping("/api/part")
+@RequestMapping("/part")
 public class PartController {
 
 	@Autowired

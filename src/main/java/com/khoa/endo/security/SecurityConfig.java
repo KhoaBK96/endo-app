@@ -25,9 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/api/repairOrder/","/api/repairOrder/add").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name(),RoleCode.COORDINATOR.name())
-		.antMatchers("/api/repairOrder/**").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name())
-		.antMatchers("/api/**").hasAuthority(RoleCode.MANAGER.name())
+		.antMatchers("/repairOrder/","/repairOrder/add").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name(),RoleCode.COORDINATOR.name())
+		.antMatchers("/repairOrder/**").hasAnyAuthority(RoleCode.MANAGER.name(), RoleCode.ENGINEER.name())
+		.antMatchers("/**").hasAuthority(RoleCode.MANAGER.name())
 		.and().formLogin()
 //		.antMatchers("/").permitAll()
 		.and().csrf().disable();

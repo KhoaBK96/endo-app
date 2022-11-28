@@ -158,7 +158,7 @@
 	// dat event onchange o table > .quantity -> neu onchange -> cam ID + value hien tai -> cap nhat Map 
 		
 		function visitPage(){
-			window.location = "http://localhost:8080/repairRankForModel/add";
+			window.location = "${pageContext.servletContext.contextPath}/repairRankForModel/add";
 	}
 	
 		$(function () {
