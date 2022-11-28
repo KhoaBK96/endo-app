@@ -169,7 +169,7 @@ public class RepairDetailController {
 
 		repairOrderService.update(repairOrder);
 
-		return "redirect:/repairOrder";
+		return "redirect:/";
 	}
 
 	@GetMapping("/repairComplete")
@@ -181,7 +181,7 @@ public class RepairDetailController {
 
 		repairOrderService.update(repairOrder);
 
-		return "redirect:/repairOrder";
+		return "redirect:/";
 	}
 	
 	
